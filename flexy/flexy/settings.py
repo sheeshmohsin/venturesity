@@ -99,6 +99,11 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.messages.context_processors.messages',
+    'django.contrib.auth.context_processors.auth',
+)
+
 ROOT_URLCONF = 'flexy.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -120,6 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'bootstrap3',
     'app',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
