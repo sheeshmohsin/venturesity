@@ -1,0 +1,5 @@
+# Python Packages
+pymongo
+
+# Bootstrap
+django-bootstrap3

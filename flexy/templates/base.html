@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load bootstrap3 %}
+{% load static %}
+
+<head>
+    <title>Full Stack Challenge</title>
+{% block staticfiles %}
+    {% bootstrap_css %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    {% bootstrap_javascript %}
+{% endblock %}
+
+
+{% block excss %}
+
+{% endblock %}
+</head>
+
+{% block bodytag %}
+<body>
+{% endblock %}
+
+{% block navbar %}
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" id="fmeasure">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Company Logo</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:void()">About Us</a></li>
+            <li id="javascript:void()"><a href="./">FAQ</a></li>
+            <li id="javascript:void()"><a href="mailto:contactus@cannyprice.com">Contact Us</a>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <!-- End fixed navbar -->
+{% endblock %}
+
+{% block messages %}
+  <div class="container indexing">
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
+  </div>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block exjs %}
+
+{% endblock %}
+
+{% block footer %}
+    </body>
+    <style>
+    body {
+        padding-top: 60px;
+        margin:0;
+    }
+    </style>
+    </html>
+{% endblock %}
