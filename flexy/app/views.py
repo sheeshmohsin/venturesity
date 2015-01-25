@@ -1,8 +1,9 @@
 from django.shortcuts import render_to_response
 from app.models import *
 from app.forms import RegistrationForm, DiseaseForm
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.template import RequestContext
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.context_processors import csrf
 from django.contrib import messages
 from django.views.generic import ListView, DetailView
@@ -56,7 +57,7 @@ def patient_list(request):
 def patient_detail(request, pk):
     collection = db.app_registration
     oneobj = collection.find_one({"_id":ObjectId(pk)})
-    diseases = "some"
+    diseases = db.app_disease.find({"patient":ObjectId(pk)})
     return render_to_response('patient_detail.html', {'object':oneobj, 
         'diseases':diseases, 'form':DiseaseForm, 'pk':pk},
          context_instance=RequestContext(request))
@@ -64,7 +65,7 @@ def patient_detail(request, pk):
 def save_disease(request, pk):
     field_list = ['csrfmiddlewaretoken']
     oneobj = db.app_registration.find_one({"_id":ObjectId(pk)})
-    diseases = "some"
+    diseases = db.app_disease.find({"patient":ObjectId(pk)})
     finaldict = dict()
     if request.method=="POST":
         form = DiseaseForm(request.POST)
@@ -75,6 +76,7 @@ def save_disease(request, pk):
             finaldict['patient'] = ObjectId(pk)
             db.app_disease.insert(finaldict)
             messages.success(request, "Saved Successfully")
+            return HttpResponseRedirect(reverse("patient_detail", kwargs={"pk": pk}))
             return render_to_response('patient_detail.html', {'object':oneobj,
             'diseases':diseases, 'form':DiseaseForm, 'pk':pk},
             context_instance=RequestContext(request))

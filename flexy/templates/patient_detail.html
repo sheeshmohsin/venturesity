@@ -15,13 +15,22 @@
             <p style="font-size:1.5em;">Mobile: {{object.mobile}}</p>
         </div>
     </div>
-    <h3 class="text-center">Patient Disease</h3>
+    <h3>Patient Disease</h3>
+    <div class="row">
+        {% for disease in diseases %}
+            <h4>Patient disease {{forloop.counter}}</h4>
+            {% for key, value in disease.items %}
+                <p style="font-size:1em;">{{key}}: {{value}}</p>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <h3 class="text-center">Add Patient Disease</h3>
     <div class="row">
         <div class="col-lg-12">
             <form action="/save_disease/{{pk}}/" method="post" enctype="multipart/form-data">{% csrf_token %}
-                <table id="addition">
+                <div id="addition">
                     {{ form }}
-                </table>
+                </div>
                 <button type="submit" class="btn btn-lg btn-primary">Submit</button>
                 <button type="button" class="btn btn-lg btn-info" onclick="addMore()">Add More Fields</button>
             </form>
@@ -32,7 +41,7 @@
 function addMore(){
     var field = prompt("Enter a field Name:");
     var field_id = "id_" + field.toLowerCase()
-    var data = "<tr><th><label for="+field_id+">"+field+"</label></th><td><input class='form-control' id="+field_id+" name="+field.toLowerCase()+ " type='text'/></td></tr>";
+    var data = "<label for="+field_id+">"+field+"</label><input class='form-control' id="+field_id+" name="+field.toLowerCase()+ " type='text'/>";
     alert(data);
     $("#addition").html($("#addition").html() + data)
 }
