@@ -1,5 +1,79 @@
 {% extends "home.html" %}
+{% load app_filters %}
+
+{% block navbar %}
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" id="fmeasure">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Company Logo</a>
+        </div>
+        <div class="col-lg-1"></div>
+        <div class="col-sm-4 col-md-4">
+            <form class="navbar-form" role="search" action="/search/">
+                <div class="input-group col-sm-12">
+                    <input type="text" class="form-control search-input" placeholder="Search" name="q">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default btn-search" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+          </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:void()">About Us</a></li>
+            <li id="javascript:void()"><a href="./">FAQ</a></li>
+            <li id="javascript:void()"><a href="mailto:contactus@cannyprice.com">Contact Us</a>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <!-- End fixed navbar -->
+{% endblock %}
 
 {% block content %}
-{{ object_list }}
+<div class="container">
+  <h3>Patient Records</h3>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>S. No.</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Date</th>
+          <th>Mobile</th>
+          <th>Doctor</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for object in object_list %}
+      <tr onclick="openDetails('{{object.id}}');" class="details">
+        <td> {{ forloop.counter }}</td>
+        <td> {{ object.first_name }}</td>
+        <td> {{ object.last_name }}</td>
+        <td> {{ object.age }}</td>
+        <td> {{ object.date }}</td>
+        <td> {{ object.mobile }}</td>
+        <td> {{ object.doctor }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+<style>
+    .details{
+        cursor:pointer;
+    }
+</style>
+<script>
+function openDetails(id){
+    window.location.href="/patient_detail/"+id+"/";
+}
+</script>
 {% endblock %}

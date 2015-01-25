@@ -32,7 +32,7 @@ TIME_ZONE = 'America/Chicago'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-SITE_ID = 1
+SITE_ID = u'54c3c2ebf0d6142f25b84dce'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -45,14 +45,13 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+# MEDIA CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+ 
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+MEDIA_URL = '/media/'
+# END MEDIA CONFIGURATION
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files

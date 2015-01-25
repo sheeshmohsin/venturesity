@@ -1,0 +1,24 @@
+{% extends "home.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Individual Patient Records</h2>
+    <div class="row">
+        <div class="col-lg-4">
+            <img src="/media/{{object.picture}}" width="300px"/>
+        </div>
+        <div class="col-lg-8">
+            <p style="font-size:1.5em;">First Name: {{object.first_name}}</p>
+            <p style="font-size:1.5em;">Last Name: {{object.last_name}}</p>
+            <p style="font-size:1.5em;">Age: {{object.age}}</p>
+            <p style="font-size:1.5em;">Mobile: {{object.mobile}}</p>
+        </div>
+    </div>
+    <h3>Patient Disease</h3>
+    <div class="row">
+        <div class="col-lg-12">
+            {{ form }}
+        </div>
+    </div> 
+</div>
+{% endblock %}
