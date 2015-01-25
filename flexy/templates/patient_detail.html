@@ -14,10 +14,10 @@
             <p style="font-size:1.5em;">Mobile: {{object.mobile}}</p>
         </div>
     </div>
-    <h3>Patient Disease</h3>
+    <h3 class="text-center">Patient Disease</h3>
     <div class="row">
         <div class="col-lg-12">
-            <form action="/savedisease/{{pk}}/" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <form action="/save_disease/{{pk}}/" method="post" enctype="multipart/form-data">{% csrf_token %}
                 {{ form }}
                 <button type="submit" class="btn btn-lg btn-primary">Submit</button>
             </form>

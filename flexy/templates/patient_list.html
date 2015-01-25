@@ -53,7 +53,7 @@
     </thead>
     <tbody>
     {% for object in object_list %}
-      <tr onclick="openDetails('{{object.id}}');" class="details">
+      <tr onclick="openDetails('{{object|private}}');" class="details">
         <td> {{ forloop.counter }}</td>
         <td> {{ object.first_name }}</td>
         <td> {{ object.last_name }}</td>

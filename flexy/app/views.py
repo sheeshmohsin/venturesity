@@ -23,7 +23,7 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Registration Successful")
-            return render_to_response('register.html', {'form':form}, context_instance=RequestContext(request))
+            return render_to_response('register.html', {'form':RegistrationForm}, context_instance=RequestContext(request))
         else:
             messages.error(request, "Some Error Occured")
             return render_to_response('register.html', {'form':form}, context_instance=RequestContext(request))
@@ -49,6 +49,10 @@ class PatientDetailView(DetailView):
     model = Registration
     template_name = 'patient_detail.html'
 
+def patient_list(request):
+    data = db.app_registration.find()
+    return render_to_response('patient_list.html', {'object_list':data})
+
 def patient_detail(request, pk):
     collection = db.app_registration
     oneobj = collection.find_one({"_id":ObjectId(pk)})
@@ -58,7 +62,27 @@ def patient_detail(request, pk):
          context_instance=RequestContext(request))
 
 def save_disease(request, pk):
-    if request.method==POST:
-        print request.POST
-        return HttpResponse("OK")
+    field_list = ['csrfmiddlewaretoken']
+    oneobj = db.app_registration.find_one({"_id":ObjectId(pk)})
+    diseases = "some"
+    finaldict = dict()
+    if request.method=="POST":
+        form = DiseaseForm(request.POST)
+        if form.is_valid:
+            for key, value in request.POST.iteritems():
+                if key not in field_list:
+                    finaldict[key] = value
+            finaldict['patient'] = ObjectId(pk)
+            db.app_disease.insert(finaldict)
+            messages.success(request, "Saved Successfully")
+            return render_to_response('patient_detail.html', {'object':oneobj,
+            'diseases':diseases, 'form':DiseaseForm, 'pk':pk},
+            context_instance=RequestContext(request))
+        else:
+            messages.error(request, "Some error occured")
+            return render_to_response('patient_detail.html', {'object':oneobj,
+            'diseases':diseases, 'form':form, 'pk':pk},
+            context_instance=RequestContext(request))
+    else:
+        return HttpResponse("Something fishy is going on")
 
