@@ -35,7 +35,7 @@ class Registration(models.Model):
         return self.first_name
 
 class Disease(models.Model):
-    patient = models.ForeignKey(Registration)
+    patient = models.ForeignKey('Registration')
     symptom = models.CharField(_('Disease Symptom'), max_length=50)
     doctor = models.CharField(_('Doctor Consulted'), max_length=50)
     prescription = models.CharField(_('Prescription'), max_length=50)

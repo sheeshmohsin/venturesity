@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^register/$', 'app.views.register'),
     url(r'^search/$', 'app.views.search'),
     url(r'^patient_list/$', views.PatientListView.as_view()),
-    url(r'^patient_detail/(?P<pk>[\w\-_]+)/$', views.PatientDetailView.as_view()),
+    url(r'^patient_detail/(?P<pk>[\w\-_]+)/$', 'app.views.patient_detail'),
+    url(r'^save_disease/(?P<pk>[\w\-_]+)/$', 'app.views.save_disease'),
     url(r'^admin/', include(admin.site.urls)),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

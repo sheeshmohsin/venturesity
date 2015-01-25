@@ -1,4 +1,4 @@
-from app.models import *
+from app.models import Registration, Disease
 from django import forms
 
 class RegistrationForm(forms.ModelForm):

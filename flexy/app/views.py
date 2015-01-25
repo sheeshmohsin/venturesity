@@ -1,7 +1,8 @@
 from django.shortcuts import render_to_response
 from app.models import *
-from app.forms import *
+from app.forms import RegistrationForm, DiseaseForm
 from django.template import RequestContext
+from django.http import HttpResponse
 from django.core.context_processors import csrf
 from django.contrib import messages
 from django.views.generic import ListView, DetailView
@@ -51,5 +52,13 @@ class PatientDetailView(DetailView):
 def patient_detail(request, pk):
     collection = db.app_registration
     oneobj = collection.find_one({"_id":ObjectId(pk)})
-    diseases = oneobj.disease_set.all()
-    return render_to_response('patient_detail.html', {'object':oneobj, 'diseases':diseases, 'form':DiseaseForm})
+    diseases = "some"
+    return render_to_response('patient_detail.html', {'object':oneobj, 
+        'diseases':diseases, 'form':DiseaseForm, 'pk':pk},
+         context_instance=RequestContext(request))
+
+def save_disease(request, pk):
+    if request.method==POST:
+        print request.POST
+        return HttpResponse("OK")
+

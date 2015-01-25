@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
+	<button class="btn btn-lg btn-primary" onclick="register()">Register Patient</button>
 </div>
+<script>
+function register(){
+	window.location.href="/register/";
+}
+</script>
 {% endblock %}
